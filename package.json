@@ -11,7 +11,7 @@
     "zip": "node ./scripts/create-zip.js"
   },
   "dependencies": {
-    "next": "14.3.0",
+    "next": "14.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "axios": "^1.5.0",
@@ -19,7 +19,7 @@
     "@prisma/client": "^5.0.0",
     "swr": "^2.1.0",
     "framer-motion": "^9.0.0",
-    "@clerk/nextjs": "^5.0.0"
+    "@clerk/nextjs": "5.7.5"
   },
   "devDependencies": {
     "prisma": "^5.0.0",
