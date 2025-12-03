@@ -4,7 +4,10 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
-    config.resolve.alias["@"] = path.resolve(__dirname);
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname),
+    };
     return config;
   },
 };
