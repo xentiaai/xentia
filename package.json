@@ -1,0 +1,30 @@
+{
+  "name": "xentia",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "zip": "node ./scripts/create-zip.js"
+  },
+  "dependencies": {
+    "next": "14.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "^1.5.0",
+    "stripe": "^12.0.0",
+    "@prisma/client": "^5.0.0",
+    "swr": "^2.1.0",
+    "framer-motion": "^9.0.0",
+    "@clerk/nextjs": "^5.0.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "archiver": "^5.3.1"
+  }
+}

@@ -1,0 +1,7 @@
+const fs = require('fs'), archiver = require('archiver')
+const output = fs.createWriteStream('xentia_full_package.zip')
+const archive = archiver('zip', { zlib: { level: 9 }})
+output.on('close', ()=> console.log('zip created', archive.pointer()))
+archive.pipe(output)
+archive.directory('.', false)
+archive.finalize()
