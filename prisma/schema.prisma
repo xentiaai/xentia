@@ -14,7 +14,6 @@ model User {
   role      String    @default("client")
   createdAt DateTime  @default(now())
 
-  // RELATIONS
   agents       Agent[]
 }
 
@@ -26,7 +25,6 @@ model Agent {
   settings    Json?
   createdAt   DateTime     @default(now())
 
-  // RELATIONS
   owner       User         @relation(fields: [ownerId], references: [id])
   conversations Conversation[]
 }
@@ -37,6 +35,5 @@ model Conversation {
   messages  Json
   createdAt DateTime  @default(now())
 
-  // RELATIONS
   agent     Agent     @relation(fields: [agentId], references: [id])
 }
