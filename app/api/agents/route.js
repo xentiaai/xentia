@@ -1,29 +1,55 @@
-// app/api/agents/route.js
 export const dynamic = "force-dynamic";
 
 import prisma from "@/lib/db";
-import { jsonResponse, errorResponse, parseJson } from "@/lib/api";
+import { auth } from "@clerk/nextjs/server";
 
 export async function GET() {
   try {
-    const agents = await prisma.agent.findMany();
-    return jsonResponse(agents);
+    const { userId } = auth();
+    if (!userId)
+      return new Response("Unauthorized", { status: 401 });
+
+    const agents = await prisma.agent.findMany({
+      where: { ownerId: userId },
+    });
+
+    return new Response(JSON.stringify(agents), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (e) {
-    return errorResponse(e.message);
+    return new Response(JSON.stringify({ error: e.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const body = await parseJson(req);
-    const { name, ownerId, description } = body;
-    if (!name || !ownerId) return errorResponse("name and ownerId are required", 400);
+    const { userId } = auth();
+    if (!userId)
+      return new Response("Unauthorized", { status: 401 });
 
-    const a = await prisma.agent.create({
-      data: { name, ownerId, description },
+    const body = await request.json();
+    const { name, description } = body;
+
+    const agent = await prisma.agent.create({
+      data: {
+        name,
+        description,
+        ownerId: userId, // 👈 automatyczne ID zalogowanego użytkownika
+      },
     });
-    return jsonResponse(a, 201);
+
+    return new Response(JSON.stringify(agent), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (e) {
-    return errorResponse(e.message);
+    return new Response(JSON.stringify({ error: e.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
