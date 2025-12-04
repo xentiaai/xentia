@@ -1,39 +1,29 @@
+// app/api/agents/route.js
 export const dynamic = "force-dynamic";
 
 import prisma from "@/lib/db";
+import { jsonResponse, errorResponse, parseJson } from "@/lib/api";
 
 export async function GET() {
   try {
     const agents = await prisma.agent.findMany();
-    return new Response(JSON.stringify(agents), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    });
+    return jsonResponse(agents);
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
+    return errorResponse(e.message);
   }
 }
 
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const body = await request.json();
+    const body = await parseJson(req);
     const { name, ownerId, description } = body;
+    if (!name || !ownerId) return errorResponse("name and ownerId are required", 400);
 
     const a = await prisma.agent.create({
-      data: { name, ownerId, description }
+      data: { name, ownerId, description },
     });
-
-    return new Response(JSON.stringify(a), {
-      status: 201,
-      headers: { "Content-Type": "application/json" }
-    });
+    return jsonResponse(a, 201);
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
+    return errorResponse(e.message);
   }
 }
