@@ -8,25 +8,35 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(cuid())
-  email     String  @unique
+  id        String    @id @default(cuid())
+  email     String    @unique
   name      String?
-  role      String  @default("client")
-  createdAt DateTime @default(now())
+  role      String    @default("client")
+  createdAt DateTime  @default(now())
+
+  // RELATIONS
+  agents       Agent[]
 }
 
 model Agent {
-  id          String  @id @default(cuid())
+  id          String       @id @default(cuid())
   name        String
   ownerId     String
   description String?
-  settings    String?  // json
-  createdAt   DateTime @default(now())
+  settings    Json?
+  createdAt   DateTime     @default(now())
+
+  // RELATIONS
+  owner       User         @relation(fields: [ownerId], references: [id])
+  conversations Conversation[]
 }
 
 model Conversation {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   agentId   String
-  messages  String   // JSON
-  createdAt DateTime @default(now())
+  messages  Json
+  createdAt DateTime  @default(now())
+
+  // RELATIONS
+  agent     Agent     @relation(fields: [agentId], references: [id])
 }
