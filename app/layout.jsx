@@ -1,4 +1,5 @@
-// src/app/layout.jsx
+"use client";
+
 import "./globals.css";
 import { MotionConfig, motion } from "framer-motion";
 
