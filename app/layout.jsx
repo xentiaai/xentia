@@ -1,13 +1,8 @@
 "use client";
-
 export const runtime = "nodejs";
 
 import "./globals.css";
 import { MotionConfig, motion } from "framer-motion";
-
-export const metadata = {
-  title: "Xentia — AI agents platform",
-};
 
 export default function RootLayout({ children }) {
   return (
