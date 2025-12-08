@@ -1,21 +1,58 @@
-'use client'
-import Link from 'next/link'
-import DemoChat from '../components/ui/DemoChat'
-export default function Page(){
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b p-4 flex justify-between items-center">
-        <div className="flex items-center gap-3"><div className="w-10 h-10 bg-indigo-600 text-white flex items-center justify-center rounded">X</div><div><div className="font-bold">Xentia</div><div className="text-xs">AI agents for business</div></div></div>
-        <nav className="flex gap-4"><Link href="/dashboard">Dashboard</Link><Link href="/admin">Admin</Link></nav>
-      </header>
-      <main className="max-w-6xl mx-auto p-8">
-        <h1 className="text-4xl font-extrabold">Xentia — Agents for business</h1>
-        <p className="mt-4 text-gray-600">Deploy AI agents to websites, handle support, capture leads, automate workflows.</p>
-        <div className="mt-6 grid md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded shadow"><h3>Demo chat</h3><DemoChat/></div>
-          <div className="bg-white p-6 rounded shadow"><h3>How it works</h3><ol><li>Create agent</li><li>Train prompt</li><li>Embed widget</li></ol></div>
+    <main>
+
+      {/* HERO */}
+      <section className="hero">
+        <div className="container">
+          <h1>
+            Your AI Voice Agent, Reimagined  
+          </h1>
+          <p className="hero-subtitle">
+            Xentia delivers natural AI voice interactions with speed, accuracy, and ultra-human tonality.
+          </p>
+          <a className="primary-btn" href="#">
+            Get Started
+          </a>
         </div>
-      </main>
-    </div>
-  )
+      </section>
+
+      {/* CAPABILITIES */}
+      <section>
+        <div className="container">
+
+          <div className="section-header">
+            <h2>Capabilities</h2>
+            <p>Real-time reasoning, natural voice, and enterprise-grade intelligence.</p>
+          </div>
+
+          <div className="feature-grid">
+
+            <div className="feature-card">
+              <h3>Real-Time Voice AI</h3>
+              <p>High-precision streaming interactions with near-instant latency.</p>
+            </div>
+
+            <div className="feature-card">
+              <h3>Context Memory</h3>
+              <p>Understands multi-step conversations with long-term context retention.</p>
+            </div>
+
+            <div className="feature-card">
+              <h3>Multi-Modal Reasoning</h3>
+              <p>Processes voice, text, and instructions with complex logical thinking.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer>
+        Xentia © {new Date().getFullYear()}
+      </footer>
+
+    </main>
+  );
 }
