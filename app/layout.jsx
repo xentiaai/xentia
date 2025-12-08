@@ -1,24 +1,20 @@
-"use client";
-export const runtime = "nodejs";
-
+// src/app/layout.jsx
 import "./globals.css";
-import { MotionConfig, motion } from "framer-motion";
+
+export const metadata = {
+  title: "Xentia — AI agents platform",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pl" className="dark">
-      <body className="min-h-screen bg-gray-950 text-gray-200 antialiased">
-        <MotionConfig reducedMotion="user">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="flex flex-col flex-1"
-          >
-            {children}
-          </motion.div>
-        </MotionConfig>
-      </body>
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
